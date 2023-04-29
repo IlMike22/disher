@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.disher.category.CategoryScreen
 import com.example.disher.ui.theme.DisherTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,5 +31,3 @@ class MainActivity : ComponentActivity() {
 fun DisherApp() {
     CategoryScreen()
 }
-
-//www.themealdb.com/api/json/v1/1/categories.php

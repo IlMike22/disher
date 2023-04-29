@@ -1,5 +1,7 @@
 package com.example.disher.category.domain.use_case
 
+import com.example.disher.category.data.model.CategoryResponse
+
 interface IGetCategoriesUseCase {
-    operator fun invoke(): String
+    suspend operator fun invoke(): CategoryResponse
 }

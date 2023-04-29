@@ -7,9 +7,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.disher.category.presentation.viewmodel.CategoryViewModel
 
 @Composable
-fun CategoryScreen() {
+fun CategoryScreen(
+    viewModel: CategoryViewModel = hiltViewModel()
+) {
     val categories = getFakeData()
     Column {
         Text(text = "Category")
