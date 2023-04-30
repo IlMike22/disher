@@ -3,14 +3,8 @@ package com.example.disher
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.disher.category.CategoryScreen
+import com.example.disher.category.presentation.CategoryScreen
 import com.example.disher.ui.theme.DisherTheme
 import dagger.hilt.android.AndroidEntryPoint
 
