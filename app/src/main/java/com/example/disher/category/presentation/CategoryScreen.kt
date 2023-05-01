@@ -1,6 +1,7 @@
 package com.example.disher.category.presentation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,26 +26,31 @@ import com.example.disher.category.presentation.viewmodel.CategoryViewModel
 
 @Composable
 fun CategoryScreen(
-    viewModel: CategoryViewModel = hiltViewModel()
+    viewModel: CategoryViewModel = hiltViewModel(),
+    onItemClick: (Category) -> Unit
 ) {
     val categories by remember { viewModel.categories }
     Text(text = "Category")
     Spacer(modifier = Modifier.height(16.dp))
     LazyColumn() {
         items(categories) { category ->
-            SingleCategoryItem(category = category)
+            SingleCategoryItem(category = category, onItemClick)
         }
     }
 }
 
 @Composable
 fun SingleCategoryItem(
-    category: Category
+    category: Category,
+    onClick: (Category) -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize()
+            .clickable {
+                onClick(category)
+            }
     ) {
         Row(
             modifier = Modifier.padding(24.dp),
