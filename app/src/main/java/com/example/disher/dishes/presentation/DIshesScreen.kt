@@ -4,6 +4,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun DishesScreen() {
-    Text(text = "Dishes here!")
+fun DishesScreen(
+    category: String
+) {
+    Text(text = "Dishes here! Category is $category")
 }

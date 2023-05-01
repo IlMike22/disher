@@ -27,7 +27,7 @@ import com.example.disher.category.presentation.viewmodel.CategoryViewModel
 @Composable
 fun CategoryScreen(
     viewModel: CategoryViewModel = hiltViewModel(),
-    onItemClick: (Category) -> Unit
+    onItemClick: (String) -> Unit
 ) {
     val categories by remember { viewModel.categories }
     Text(text = "Category")
@@ -42,14 +42,14 @@ fun CategoryScreen(
 @Composable
 fun SingleCategoryItem(
     category: Category,
-    onClick: (Category) -> Unit
+    onClick: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize()
             .clickable {
-                onClick(category)
+                onClick(category.strCategory)
             }
     ) {
         Row(
