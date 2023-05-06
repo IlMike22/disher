@@ -45,7 +45,7 @@ fun DisherApp() {
                 it.arguments?.getString("category")
             }
 
-            DishesScreen(categoryString?:"")
+            DishesScreen(category = categoryString ?: "")
         }
     }
 }
