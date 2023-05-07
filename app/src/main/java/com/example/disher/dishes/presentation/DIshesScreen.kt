@@ -1,11 +1,15 @@
 package com.example.disher.dishes.presentation
 
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.disher.dishes.data.model.Meal
+import com.example.disher.utils.presentation.SingleItem
 
 @Composable
 fun DishesScreen(
@@ -23,12 +27,23 @@ fun DishesScreen(
 
     when (val castedState = state) {
         is ViewState.Error -> {
-            Text(text = "Error ${(castedState.message)}") //Why needs casting?
+            Text(text = "Error ${(castedState.message)}")
         }
 
         is ViewState.Loading -> Text(text = "Loading")
         is ViewState.Success -> {
-            Text(text = "Success ${castedState.data}")
+            DishesList(meals = castedState.data)
+        }
+    }
+}
+
+@Composable
+fun DishesList(
+    meals: List<Meal>
+) {
+    LazyColumn() {
+        items(meals) { meal ->
+            SingleItem(title = meal.strMeal, thumbnail = meal.strMealThumb, {})
         }
     }
 }
