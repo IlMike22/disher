@@ -5,6 +5,11 @@ import com.example.disher.category.data.service.ICategoryService
 import com.example.disher.category.domain.repository.ICategoryRepository
 import com.example.disher.category.domain.use_case.GetCategoriesUseCase
 import com.example.disher.category.domain.use_case.IGetCategoriesUseCase
+import com.example.disher.detail.data.repository.DetailRepository
+import com.example.disher.detail.data.service.IDetailService
+import com.example.disher.detail.domain.repository.IDetailRepository
+import com.example.disher.detail.domain.use_case.GetDetailsUseCase
+import com.example.disher.detail.domain.use_case.IGetDetailsUseCase
 import com.example.disher.dishes.data.repository.DishesRepository
 import com.example.disher.dishes.data.service.IDishesService
 import com.example.disher.dishes.domain.GetDishesUseCase
@@ -24,7 +29,7 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun providesRetrofit(): Retrofit {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://www.themealdb.com/api/json/v1/1/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -33,14 +38,20 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesCategoryService(retrofit: Retrofit): ICategoryService {
+    fun provideCategoryService(retrofit: Retrofit): ICategoryService {
         return retrofit.create(ICategoryService::class.java)
     }
 
     @Provides
     @Singleton
-    fun providesDishesService(retrofit: Retrofit): IDishesService {
+    fun provideDishesService(retrofit: Retrofit): IDishesService {
         return retrofit.create(IDishesService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetailService(retrofit: Retrofit): IDetailService {
+        return retrofit.create(IDetailService::class.java)
     }
 
     @Module
@@ -56,10 +67,18 @@ class AppModule {
 
         @Binds
         @Singleton
+        fun provideDetailsRepository(repository: DetailRepository): IDetailRepository
+
+        @Binds
+        @Singleton
         fun provideGetCategoryUseCase(useCase: GetCategoriesUseCase): IGetCategoriesUseCase
 
         @Binds
         @Singleton
         fun provideGetDishesUseCase(useCase: GetDishesUseCase): IGetDishesUseCase
+
+        @Binds
+        @Singleton
+        fun provideGetDetailsUseCase(useCase: GetDetailsUseCase): IGetDetailsUseCase
     }
 }

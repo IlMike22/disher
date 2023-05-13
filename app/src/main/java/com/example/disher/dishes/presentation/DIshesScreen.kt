@@ -14,7 +14,8 @@ import com.example.disher.utils.presentation.SingleItem
 @Composable
 fun DishesScreen(
     viewModel: DishesViewModel = hiltViewModel(),
-    category: String?
+    category: String?,
+    onDetailClick: (id: String) -> Unit
 ) {
     val state by remember { viewModel.viewState }
 
@@ -32,18 +33,23 @@ fun DishesScreen(
 
         is ViewState.Loading -> Text(text = "Loading")
         is ViewState.Success -> {
-            DishesList(meals = castedState.data)
+            DishesList(meals = castedState.data, onDetailClick)
         }
     }
 }
 
 @Composable
 fun DishesList(
-    meals: List<Meal>
+    meals: List<Meal>,
+    onDetailClick: (id: String) -> Unit
 ) {
     LazyColumn() {
         items(meals) { meal ->
-            SingleItem(title = meal.strMeal, thumbnail = meal.strMealThumb, {})
+            SingleItem(
+                title = meal.strMeal,
+                thumbnail = meal.strMealThumb,
+                onClick = { onDetailClick(meal.idMeal) }
+            )
         }
     }
 }

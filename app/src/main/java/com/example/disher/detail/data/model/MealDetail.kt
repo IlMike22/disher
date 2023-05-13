@@ -1,6 +1,6 @@
 package com.example.disher.detail.data.model
 
-data class Detail(
+data class MealDetail(
     val dateModified: Any,
     val idMeal: String,
     val strArea: String,
