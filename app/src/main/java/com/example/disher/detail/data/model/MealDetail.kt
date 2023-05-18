@@ -1,5 +1,8 @@
 package com.example.disher.detail.data.model
 
+import androidx.room.Entity
+
+@Entity(tableName = "meal_details")
 data class MealDetail(
     val dateModified: Any,
     val idMeal: String,

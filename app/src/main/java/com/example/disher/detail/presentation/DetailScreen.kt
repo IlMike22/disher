@@ -1,6 +1,7 @@
 package com.example.disher.detail.presentation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,10 +25,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.example.disher.R
 import com.example.disher.detail.presentation.viewmodel.DetailViewModel
 
 @Composable
@@ -62,13 +65,25 @@ fun DetailScreen(
             Row {
                 Text(
                     text = state.mealDetails?.strCategory ?: "",
-                    style = MaterialTheme.typography.headlineSmall
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.weight(1f)
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 Image(
                     painter = rememberAsyncImagePainter(state.mealDetails?.strMealThumb),
                     modifier = Modifier.size(40.dp),
                     contentDescription = null
+                )
+                Spacer(modifier = Modifier.width(32.dp))
+                Image(painterResource(
+                    id = if (state.isInFavorites) R.drawable.ic_heart else R.drawable.ic_heart_outline
+                ),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clickable {
+                            //TODO send event to vm (store it in database if not already exists)
+                        }
                 )
             }
 
@@ -102,9 +117,11 @@ fun InstructionTextBlock(
         mutableStateOf(false)
     }
 
-    Column(modifier = modifier
-        .padding(16.dp)
-        .fillMaxWidth()) {
+    Column(
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    ) {
         Box(modifier = Modifier
             .`if`(!showMore) {
                 height(100.dp)
