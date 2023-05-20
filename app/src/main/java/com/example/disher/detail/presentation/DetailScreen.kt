@@ -18,6 +18,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,12 +33,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.disher.R
+import com.example.disher.detail.presentation.model.DetailEvent
 import com.example.disher.detail.presentation.viewmodel.DetailViewModel
 
 @Composable
 fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
-    mealId: String
+    mealId: String,
+    isInFavorites: State<Boolean>
 ) {
     val state by remember { viewModel.mealState }
     val uriHandler = LocalUriHandler.current
@@ -76,13 +80,13 @@ fun DetailScreen(
                 )
                 Spacer(modifier = Modifier.width(32.dp))
                 Image(painterResource(
-                    id = if (state.isInFavorites) R.drawable.ic_heart else R.drawable.ic_heart_outline
+                    id = if (isInFavorites.value) R.drawable.ic_heart else R.drawable.ic_heart_outline
                 ),
                     contentDescription = null,
                     modifier = Modifier
                         .size(32.dp)
                         .clickable {
-                            //TODO send event to vm (store it in database if not already exists)
+                            viewModel.onEvent(DetailEvent.OnFavoritesClicked(state.mealDetails))
                         }
                 )
             }

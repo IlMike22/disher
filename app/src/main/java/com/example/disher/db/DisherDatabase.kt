@@ -6,7 +6,8 @@ import com.example.disher.detail.data.model.MealDetail
 
 @Database(
     entities = [MealDetail::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class DisherDatabase : RoomDatabase() {
     abstract fun getDisherDao(): IDisherDao

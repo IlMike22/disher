@@ -5,16 +5,23 @@ import com.example.disher.category.data.service.ICategoryService
 import com.example.disher.category.domain.repository.ICategoryRepository
 import com.example.disher.category.domain.use_case.GetCategoriesUseCase
 import com.example.disher.category.domain.use_case.IGetCategoriesUseCase
+import com.example.disher.db.IDisherDao
 import com.example.disher.detail.data.repository.DetailRepository
 import com.example.disher.detail.data.service.IDetailService
 import com.example.disher.detail.domain.repository.IDetailRepository
 import com.example.disher.detail.domain.use_case.GetDetailsUseCase
 import com.example.disher.detail.domain.use_case.IGetDetailsUseCase
+import com.example.disher.detail.domain.use_case.IStoreToFavoritesUseCase
+import com.example.disher.detail.domain.use_case.StoreToFavoritesUseCase
 import com.example.disher.dishes.data.repository.DishesRepository
 import com.example.disher.dishes.data.service.IDishesService
 import com.example.disher.dishes.domain.GetDishesUseCase
 import com.example.disher.dishes.domain.IDishesRepository
 import com.example.disher.dishes.domain.IGetDishesUseCase
+import com.example.disher.favorites.data.repository.FavoritesRepository
+import com.example.disher.favorites.data.service.FavoritesService
+import com.example.disher.favorites.data.service.IFavoritesService
+import com.example.disher.favorites.domain.IFavoritesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -50,6 +57,12 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideFavoritesService(dao: IDisherDao): IFavoritesService {
+        return FavoritesService(dao)
+    }
+
+    @Provides
+    @Singleton
     fun provideDetailService(retrofit: Retrofit): IDetailService {
         return retrofit.create(IDetailService::class.java)
     }
@@ -71,6 +84,10 @@ class AppModule {
 
         @Binds
         @Singleton
+        fun provideFavoritesRepository(repository: FavoritesRepository): IFavoritesRepository
+
+        @Binds
+        @Singleton
         fun provideGetCategoryUseCase(useCase: GetCategoriesUseCase): IGetCategoriesUseCase
 
         @Binds
@@ -80,5 +97,9 @@ class AppModule {
         @Binds
         @Singleton
         fun provideGetDetailsUseCase(useCase: GetDetailsUseCase): IGetDetailsUseCase
+
+        @Binds
+        @Singleton
+        fun provideStoreToFavoritesUseCase(useCase: StoreToFavoritesUseCase): IStoreToFavoritesUseCase
     }
 }
