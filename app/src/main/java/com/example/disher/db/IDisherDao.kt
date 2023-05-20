@@ -12,4 +12,7 @@ interface IDisherDao {
 
     @Query("SELECT * FROM meal_details")
     suspend fun getMealDetails(): List<MealDetail>
+
+    @Query("SELECT * FROM meal_details WHERE idMeal = :mealId")
+    suspend fun getMealDetailFromId(mealId: String): MealDetail?
 }

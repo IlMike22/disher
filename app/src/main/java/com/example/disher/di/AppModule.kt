@@ -10,7 +10,9 @@ import com.example.disher.detail.data.repository.DetailRepository
 import com.example.disher.detail.data.service.IDetailService
 import com.example.disher.detail.domain.repository.IDetailRepository
 import com.example.disher.detail.domain.use_case.GetDetailsUseCase
+import com.example.disher.detail.domain.use_case.GetMealDetailAsFavoriteUseCase
 import com.example.disher.detail.domain.use_case.IGetDetailsUseCase
+import com.example.disher.detail.domain.use_case.IGetMealDetailAsFavoriteUseCase
 import com.example.disher.detail.domain.use_case.IStoreToFavoritesUseCase
 import com.example.disher.detail.domain.use_case.StoreToFavoritesUseCase
 import com.example.disher.dishes.data.repository.DishesRepository
@@ -101,5 +103,9 @@ class AppModule {
         @Binds
         @Singleton
         fun provideStoreToFavoritesUseCase(useCase: StoreToFavoritesUseCase): IStoreToFavoritesUseCase
+
+        @Binds
+        @Singleton
+        fun provideGetMealDetailsAsFavoriteUseCase(useCase: GetMealDetailAsFavoriteUseCase): IGetMealDetailAsFavoriteUseCase
     }
 }

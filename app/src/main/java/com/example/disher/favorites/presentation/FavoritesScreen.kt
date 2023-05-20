@@ -31,6 +31,5 @@ fun FavoritesScreen(
                 }
             }
         }
-
     }
 }

@@ -6,4 +6,5 @@ import com.example.disher.detail.data.model.MealDetail
 interface IDetailRepository {
     suspend fun getMealDetail(mealId: String): DetailResponse
     suspend fun storeMealToFavorites(mealDetail: MealDetail)
+    suspend fun getMealDetailFromFavorites(mealId: String): MealDetail?
 }

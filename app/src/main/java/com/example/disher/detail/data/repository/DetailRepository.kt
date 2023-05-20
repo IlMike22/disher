@@ -18,4 +18,8 @@ class DetailRepository @Inject constructor(
     override suspend fun storeMealToFavorites(mealDetail: MealDetail) {
         dao.insertMeal(mealDetail) // TODO MIC not so nice writing in DB directly from REPO
     }
+
+    override suspend fun getMealDetailFromFavorites(mealId: String): MealDetail? {
+        return dao.getMealDetailFromId(mealId)
+    }
 }
