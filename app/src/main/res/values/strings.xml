@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Disher</string>
+    <string name="favorites_error_text">Unfortunately an error occured :/</string>
+    <string name="favorites_title">Your Favorites</string>
+    <string name="favorites_loading">Loading the favorites...</string>
+    <string name="favorites_error_text_no_id_found">No Str Meal found..</string>
 </resources>
