@@ -9,6 +9,8 @@ class DishesRepository @Inject constructor(
     private val service: IDishesService
 ) : IDishesRepository {
     override suspend fun getDishes(categoryName: String): DishesResponse {
-        return service.getDishesForCategory(categoryName)
+        val response = service.getDishesForCategory(categoryName)
+        response.categoryId = categoryName
+        return response
     }
 }

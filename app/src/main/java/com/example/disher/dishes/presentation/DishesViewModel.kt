@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.disher.dishes.domain.IGetDishesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,6 +23,7 @@ class DishesViewModel @Inject constructor(
         _viewState.value = ViewState.Loading(true)
         viewModelScope.launch {
             try {
+                delay(1000)
                 _viewState.value = ViewState.Loading(false)
                 val dishes = getDishes(categoryName)
                 _viewState.value = ViewState.Success(dishes.meals)
